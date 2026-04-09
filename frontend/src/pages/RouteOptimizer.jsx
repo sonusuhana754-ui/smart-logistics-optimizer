@@ -156,6 +156,9 @@ export default function RouteOptimizer() {
         // Hit Mapbox Directions API for real road polylines
         const coordString = coords.map(c => c.join(',')).join(';')
         
+        const srcId = `route-source-${key}`;
+        const layId = `route-layer-${key}`;
+
         fetch(`https://api.mapbox.com/directions/v5/mapbox/driving/${coordString}?geometries=geojson&access_token=${mapboxgl.accessToken}`)
           .then(res => res.json())
           .then(data => {
@@ -474,7 +477,7 @@ export default function RouteOptimizer() {
                     <div style={{ marginTop: 12, display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                       <div className="badge badge-green">⚡ Time saving: {result.efficiency_vs_baseline.time_saving_pct}%</div>
                       <div className="badge badge-blue">📏 Distance saving: {result.efficiency_vs_baseline.distance_saving_pct}%</div>
-                      {form.eco_mode && <div className="badge" style={{ background: 'rgba(0,255,136,0.15)', color: '#00ff88' }}>🍃 CO2 Saved: {((alt1?.total_distance_km || activeRoute.total_distance_km) - activeRoute.total_distance_km * 0.15).toFixed(1)} kg</div>}
+                      {form.eco_mode && <div className="badge" style={{ background: 'rgba(0,255,136,0.15)', color: '#00ff88' }}>🍃 CO2 Saved: {((result?.alternatives?.[0]?.total_distance_km || activeRoute.total_distance_km) - activeRoute.total_distance_km * 0.15).toFixed(1)} kg</div>}
                       {result.rerouted_due_to_anomaly && <div className="badge badge-red">↺ Re-routed</div>}
                       {avoidBbox && <div className="badge badge-amber">🛡️ SLA Geofence Active</div>}
                     </div>

@@ -180,6 +180,8 @@ def optimize_route(
 
     # Dynamic re-routing: use time-optimized A* if high delay risk
     rerouted = delay_probability > 0.60
+    if rerouted:
+        optimization_mode = "time"
 
     # ── Primary Route ──────────────────────────────────────────────────
     if optimization_mode == "distance":
