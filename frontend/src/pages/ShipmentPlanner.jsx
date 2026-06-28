@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
+const API = "https://empowering-acceptance-production-e364.up.railway.app";
+
 const STATUS_BADGE = {
   pending:     'badge-amber',
   allocated:   'badge-blue',
@@ -34,9 +36,9 @@ export default function ShipmentPlanner() {
     setLoading(true)
     try {
       const [s, m, f] = await Promise.all([
-        axios.get('/api/shipments'),
-        axios.get('/api/manifests'),
-        axios.get('/api/fleet'),
+        axios.get(`${API}/api/shipments`),
+        axios.get(`${API}/api/manifests`),
+        axios.get(`${API}/api/fleet`),
       ])
       setShipments(s.data.shipments || [])
       setManifests(m.data.manifests || [])
@@ -50,7 +52,7 @@ export default function ShipmentPlanner() {
   const handleAutoAllocate = async () => {
     setAllocating(true)
     try {
-      const { data } = await axios.post('/api/automate')
+      const { data } = await axios.post(`${API}/api/automate`)
       setLastReport(data)
       await fetchAll()
     } catch {}
@@ -60,7 +62,7 @@ export default function ShipmentPlanner() {
   const handleAddShipment = async (e) => {
     e.preventDefault()
     try {
-      await axios.post('/api/shipments', { ...addForm, weight_kg: Number(addForm.weight_kg), distance_km: Number(addForm.distance_km) })
+      await axios.post(`${API}/api/shipments`, { ...addForm, weight_kg: Number(addForm.weight_kg), distance_km: Number(addForm.distance_km) })
       setAddOpen(false)
       await fetchAll()
     } catch {}

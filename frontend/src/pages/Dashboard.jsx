@@ -3,6 +3,8 @@ import axios from 'axios'
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
+const API = "https://empowering-acceptance-production-e364.up.railway.app";
+
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN || ''
 
 const WEATHER_ICONS = { Clear: '☀️', Rain: '🌧️', Fog: '🌫️', Storm: '⛈️', Snow: '❄️' }
@@ -29,7 +31,7 @@ export default function Dashboard() {
     fetchRt()
     const id = setInterval(() => { fetchAnalytics(); fetchRt() }, 8000)
 
-    const es = new EventSource('/api/stream')
+    const es = new EventSource(`${API}/api/stream`)
     eventSourceRef.current = es
     es.onmessage = (e) => {
       try {
@@ -128,18 +130,18 @@ export default function Dashboard() {
     })
   }, [analytics, timeOffset])
 
-  const fetchAnalytics = async () => { try { const { data } = await axios.get('/api/analytics'); setAnalytics(data) } catch {} }
-  const fetchRt = async () => { try { const { data } = await axios.get('/api/realtime'); setRt(data) } catch {} }
+  const fetchAnalytics = async () => { try { const { data } = await axios.get(`${API}/api/analytics`); setAnalytics(data) } catch {} }
+  const fetchRt = async () => { try { const { data } = await axios.get(`${API}/api/realtime`); setRt(data) } catch {} }
 
   const triggerAnomaly = async (type) => {
     setAnomalyLoading(true)
-    try { await axios.post('/api/simulate/trigger-anomaly', { anomaly_type: type, duration_s: 90 }); await fetchRt() } finally { setAnomalyLoading(false) }
+    try { await axios.post(`${API}/api/simulate/trigger-anomaly`, { anomaly_type: type, duration_s: 90 }); await fetchRt() } finally { setAnomalyLoading(false) }
   }
-  const resolveAnomaly = async () => { await axios.post('/api/simulate/resolve-anomaly'); await fetchRt() }
+  const resolveAnomaly = async () => { await axios.post(`${API}/api/simulate/resolve-anomaly`); await fetchRt() }
 
   const handleSwarmMode = async () => {
     if (!swarmMode) {
-      await axios.post('/api/fleet/swarm')
+      await axios.post(`${API}/api/fleet/swarm`)
       setSwarmMode(true)
       fetchAnalytics()
     } else setSwarmMode(false)
@@ -149,7 +151,7 @@ export default function Dashboard() {
     e.preventDefault(); if (!jarvisInput.trim()) return;
     setJarvisLoading(true)
     try {
-      const { data } = await axios.post('/api/jarvis', { command: jarvisInput })
+      const { data } = await axios.post(`${API}/api/jarvis`, { command: jarvisInput })
       setFeed(p => [{ id: Date.now(), color: '#00d4ff', text: data.message, time: new Date().toLocaleTimeString('en-IN') }, ...p])
       setJarvisInput('')
       await fetchAnalytics(); await fetchRt()

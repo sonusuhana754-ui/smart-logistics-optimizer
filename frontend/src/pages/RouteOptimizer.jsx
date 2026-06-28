@@ -5,6 +5,8 @@ import MapboxDraw from '@mapbox/mapbox-gl-draw'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
 
+const API = "https://empowering-acceptance-production-e364.up.railway.app";
+
 const CITIES = ['Mumbai','Delhi','Bangalore','Chennai','Kolkata','Hyderabad','Pune',
   'Ahmedabad','Jaipur','Lucknow','Surat','Kochi','Bhubaneswar','Coimbatore',
   'Goa','Chandigarh','Nagpur','Indore','Bhopal','Visakhapatnam']
@@ -67,7 +69,7 @@ export default function RouteOptimizer() {
 
   // Load live conditions
   useEffect(() => {
-    const fetch = () => axios.get('/api/realtime').then(r => setRt(r.data)).catch(() => {})
+    const fetch = () => axios.get(`${API}/api/realtime`).then(r => setRt(r.data)).catch(() => {})
     fetch()
     const id = setInterval(fetch, 5000)
     return () => clearInterval(id)
@@ -263,7 +265,7 @@ export default function RouteOptimizer() {
     e.preventDefault()
     setLoading(true); setError(null)
     try {
-      const { data } = await axios.post('/api/optimize-route', {
+      const { data } = await axios.post(`${API}/api/optimize-route`, {
         origin: form.origin,
         destination: form.destination,
         optimization_mode: form.mode,

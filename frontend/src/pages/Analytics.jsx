@@ -5,6 +5,8 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend
 } from 'recharts'
 
+const API = "https://empowering-acceptance-production-e364.up.railway.app";
+
 const COLORS = ['#00d4ff', '#00ff88', '#ffaa00', '#ff4466', '#a855f7', '#22d3ee']
 
 const CustomTooltip = ({ active, payload, label }) => {
@@ -79,8 +81,8 @@ export default function Analytics() {
       setLoading(true)
       try {
         const [a, m] = await Promise.all([
-          axios.get('/api/analytics'),
-          axios.get('/api/predict/metrics'),
+          axios.get(`${API}/api/analytics`),
+          axios.get(`${API}/api/predict/metrics`),
         ])
         setAnalytics(a.data)
         setMetrics(m.data)
