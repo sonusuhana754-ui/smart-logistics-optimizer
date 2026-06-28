@@ -63,6 +63,14 @@ app = FastAPI(
     description="Prediction Engine + Route Optimization + Shipment Automation",
     lifespan=lifespan,
 )
+@app.get("/")
+def root():
+    return {
+        "status": "running",
+        "message": "AI Logistics Optimization API",
+        "docs": "/docs",
+        "health": "/api/health"
+    }
 
 app.add_middleware(
     CORSMiddleware,
