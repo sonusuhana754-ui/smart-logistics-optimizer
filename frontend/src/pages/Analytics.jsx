@@ -5,7 +5,7 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend
 } from 'recharts'
 
-const API = "https://empowering-acceptance-production-e364.up.railway.app";
+const API = "https://empowering-acceptance-a64b.up.railway.app";
 
 const COLORS = ['#00d4ff', '#00ff88', '#ffaa00', '#ff4466', '#a855f7', '#22d3ee']
 

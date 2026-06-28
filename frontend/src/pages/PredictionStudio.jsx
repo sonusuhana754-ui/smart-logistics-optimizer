@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-const API = "https://empowering-acceptance-production-e364.up.railway.app";
+const API = "https://empowering-acceptance-a64b.up.railway.app";
 const CITIES    = ['Mumbai','Delhi','Bangalore','Chennai','Kolkata','Hyderabad','Pune','Ahmedabad','Jaipur','Lucknow','Surat','Kochi','Bhubaneswar','Coimbatore','Goa','Chandigarh','Nagpur','Indore','Bhopal','Visakhapatnam']
 const CARGO     = ['General','Electronics','Perishable','Hazardous','Fragile','Bulk']
 const PRIORITY  = ['Low','Medium','High','Critical']

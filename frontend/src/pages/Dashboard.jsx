@@ -3,7 +3,7 @@ import axios from 'axios'
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
-const API = "https://empowering-acceptance-production-e364.up.railway.app";
+const API = "https://empowering-acceptance-a64b.up.railway.app";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN || ''
 

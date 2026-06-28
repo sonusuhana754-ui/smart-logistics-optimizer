@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-const API = "https://empowering-acceptance-production-e364.up.railway.app";
+const API = "https://empowering-acceptance-a64b.up.railway.app";
 
 const STATUS_BADGE = {
   pending:     'badge-amber',

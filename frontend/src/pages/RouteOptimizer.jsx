@@ -5,7 +5,7 @@ import MapboxDraw from '@mapbox/mapbox-gl-draw'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
 
-const API = "https://empowering-acceptance-production-e364.up.railway.app";
+const API = "https://empowering-acceptance-a64b.up.railway.app";
 
 const CITIES = ['Mumbai','Delhi','Bangalore','Chennai','Kolkata','Hyderabad','Pune',
   'Ahmedabad','Jaipur','Lucknow','Surat','Kochi','Bhubaneswar','Coimbatore',
