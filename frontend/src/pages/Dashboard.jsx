@@ -153,7 +153,12 @@ export default function Dashboard() {
       setFeed(p => [{ id: Date.now(), color: '#00d4ff', text: data.message, time: new Date().toLocaleTimeString('en-IN') }, ...p])
       setJarvisInput('')
       await fetchAnalytics(); await fetchRt()
-    } catch {}
+    } catch (err) {
+      console.error("Jarvis Error:", err);
+      if (err.response) {
+        console.error("Server Response:", err.response.data);
+      }
+    }
     setJarvisLoading(false)
   }
 

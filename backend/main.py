@@ -14,6 +14,13 @@ from typing import Optional
 import google.generativeai as genai
 from dotenv import load_dotenv
 
+import sys
+if sys.stdout.encoding.lower() != 'utf-8':
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+    except AttributeError:
+        pass
+
 load_dotenv()
 
 # Fix import paths
@@ -276,7 +283,7 @@ def jarvis_dispatch(req: JarvisRequest):
         raise HTTPException(status_code=500, detail="GEMINI_API_KEY not set in environment.")
     
     genai.configure(api_key=api_key)
-    model = genai.GenerativeModel("gemini-1.5-flash")
+    model = genai.GenerativeModel("gemini-2.5-flash")
     
     prompt = f"""
     You are Jarvis, an advanced AI Logistics Dispatcher.
