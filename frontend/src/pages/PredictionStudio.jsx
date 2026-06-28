@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-const API = import.meta.env.VITE_API_URL;
+const API = import.meta.env.VITE_API_URL || "";
 const CITIES    = ['Mumbai','Delhi','Bangalore','Chennai','Kolkata','Hyderabad','Pune','Ahmedabad','Jaipur','Lucknow','Surat','Kochi','Bhubaneswar','Coimbatore','Goa','Chandigarh','Nagpur','Indore','Bhopal','Visakhapatnam']
 const CARGO     = ['General','Electronics','Perishable','Hazardous','Fragile','Bulk']
 const PRIORITY  = ['Low','Medium','High','Critical']

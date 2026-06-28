@@ -74,8 +74,9 @@ def root():
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173",
+    allow_origins=["http://localhost:5173", "http://localhost:5174", "http://localhost:5175",
         "https://smart-logistics-optimizer.vercel.app",
+        "https://smart-logistics-optimizer-*.vercel.app",
         ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -462,4 +463,5 @@ def analytics():
 
 if __name__ == "__main__":
     import uvicorn
+    port = int(os.environ.get("PORT", 8000))
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=False)
