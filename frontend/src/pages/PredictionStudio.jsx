@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-
+const API = import.meta.env.VITE_API_URL;
 const CITIES    = ['Mumbai','Delhi','Bangalore','Chennai','Kolkata','Hyderabad','Pune','Ahmedabad','Jaipur','Lucknow','Surat','Kochi','Bhubaneswar','Coimbatore','Goa','Chandigarh','Nagpur','Indore','Bhopal','Visakhapatnam']
 const CARGO     = ['General','Electronics','Perishable','Hazardous','Fragile','Bulk']
 const PRIORITY  = ['Low','Medium','High','Critical']
@@ -46,8 +46,8 @@ export default function PredictionStudio() {
   const [history, setHistory]     = useState([])
 
   useEffect(() => {
-    axios.get('/api/realtime').then(r => setRt(r.data)).catch(() => {})
-    const id = setInterval(() => axios.get('/api/realtime').then(r => setRt(r.data)).catch(() => {}), 5000)
+    axios.get(`${API}/api/realtime`).then(r => setRt(r.data)).catch(() => {})
+    const id = setInterval(() => axios.get(`${API}/api/realtime`).then(r => setRt(r.data)).catch(() => {}), 5000)
     return () => clearInterval(id)
   }, [])
 
@@ -57,7 +57,7 @@ export default function PredictionStudio() {
     e.preventDefault()
     setLoading(true); setError(null); setResult(null)
     try {
-      const { data } = await axios.post('/api/predict', {
+      const { data } = await axios.post(`${API}/api/predict`, {
         ...form,
         distance_km: Number(form.distance_km),
         weight_kg: Number(form.weight_kg),
